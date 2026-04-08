@@ -7,7 +7,7 @@ export default function PackingList() {
             <ul>
                <Items name="여분 옷"/>
                <Items name="노트북"/>
-               <Items name="텀블러"/>
+               <Items name="텀블러" isPacked="true"/>
             </ul>
         </section>
     )
