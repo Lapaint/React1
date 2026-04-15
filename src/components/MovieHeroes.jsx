@@ -1,16 +1,26 @@
 // 1. 데이터 배열 정의 
-const heroes = [
-  '스파이더맨: 피터 파커',
-  '아이언맨: 토니 스타크',
-  '배트맨: 브루스 웨인',
-  '슈퍼맨: 클라크 켄트',
-  '헐크: 로버트 브루스 배너'
-];
+// const heroes = [
+//   '스파이더맨: 피터 파커',
+//   '아이언맨: 토니 스타크',
+//   '배트맨: 브루스 웨인',
+//   '슈퍼맨: 클라크 켄트',
+//   '헐크: 로버트 브루스 배너'
+// ];
+
+import {heroes} from "./HeroesData";
 
 // 2. MovieHeroes 컴포넌트 생성
 export default function MovieHeroes() {
+  const filterTests = heroes.filter(hero =>
+    hero.power === 5
+  );
   // map 함수를 사용하여 각 데이터를 <li> 태그로 변환
-  const listHeroes = heroes.map(hero => <li>{hero}</li>);
+  const listHeroes = filterTests.map(hero => 
+    <li>
+      <p>
+        {hero.name}의 배역은 {hero.casting}이고 파워는 {hero.power} 입니다
+      </p>
+    </li>);
 
   return (
     <section>
