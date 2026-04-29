@@ -1,0 +1,15 @@
+.title {
+    color:aqua
+}
+
+.navbar {
+    padding: 15px;
+    background-color: gray;
+
+}
+
+.myButton {
+    margin-right: 10px;
+    color: darkkhaki;
+    background-color: blueviolet;
+}
