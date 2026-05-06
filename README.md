@@ -1,6 +1,31 @@
 # 김민우 (202230305) - React1
 
 
+## [2026-05-06] 10주차: 이벤트 핸들러와 Props 연동
+
+### 1. 이벤트 핸들러 함수의 전달 규칙
+- **전달 vs 호출 구분 (중요)**: `onClick={handleClick}`처럼 함수 이름만 넘기면 클릭 시 실행되지만, `onClick={handleClick()}`처럼 소괄호를 붙이면 렌더링 시점에 즉시 실행되므로 주의가 필요함.
+- **인라인 핸들러 주의사항**: `onClick={alert('...')}` 형태는 렌더링마다 실행되므로, `onClick={() => alert('...')}` 화살표 함수로 감싸야 클릭 시에만 실행됨.
+- **React의 내부 처리**: `<button>` 태그도 React 내부에서 `React.createElement("button", { onClick: handleClick }, "버튼 클릭")` 형태로 변환되기 때문에 props를 전달할 수 있음.
+
+### 2. 이벤트 핸들러에서 Prop 사용하기 (3.1.2)
+- 이벤트 핸들러가 컴포넌트 내부에 선언되어 있으면 부모로부터 전달받은 **props에 클로저로 접근** 가능함.
+- **children prop**: `<Button>버튼1</Button>`처럼 여는/닫는 태그 사이의 내용이 자동으로 `children` prop으로 전달됨. 직접 정의하지 않아도 태그 사이 내용을 그대로 넘길 수 있음.
+- **`&nbsp;`**: JSX에서 버튼 사이 간격을 띄우기 위해 HTML 엔티티를 사용함.
+
+### 3. 이벤트 핸들러를 Prop으로 전달하기 (3.1.3)
+- 하나의 핸들러 함수만 사용하면 버튼마다 다른 동작을 구현하기 어렵기 때문에, **이벤트 핸들러 자체를 prop으로 전달**하는 방식을 사용함.
+- 부모 컴포넌트(Toolbar)에서 자식 컴포넌트(Button)를 호출할 때 이벤트 핸들러를 함께 전달하고, 자식은 받은 핸들러를 그대로 실행함.
+
+### 4. 실습 내용: 이벤트 핸들러 분리 및 동영상 재생/정지
+- **Step 1 - handle.jsx 분리**: 이벤트 핸들러를 별도 파일로 분리하고 `export`하여 외부에서 가져다 쓸 수 있도록 모듈화함.
+- **Step 2 - 핸들러를 prop으로 전달**: Toolbar에서 `handleClick`을 import하여 Button 컴포넌트의 `handle` prop으로 전달하고, Button은 받은 `handle`에 `message`를 인자로 넘겨 실행함.
+- **Step 3 - 동영상 재생/정지 구현**: `handlePlay`, `handleStop` 함수를 추가하고, `<video id="videoPlayer">` 태그를 렌더링한 뒤 `message` prop으로 id를 전달하여 DOM을 직접 조작함.
+    - `document.getElementById(id)`: HTML 문서에서 고유한 id를 가진 요소를 찾아 JavaScript 객체로 반환하는 메서드. 요소가 없으면 `null`을 반환함.
+    - `handlePlay({ message })` → `document.getElementById(message).play()`
+    - `handleStop({ message })` → `document.getElementById(message).pause()`
+
+
 ## [2026-04-29] 9주차: UI 트리 구조 및 JSX 스타일링 & 이벤트 핸들링
 
 ### 1. UI 트리 구조의 이해
